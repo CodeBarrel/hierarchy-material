@@ -1,3 +1,44 @@
-<p>
-  register works!
-</p>
+<div class="login">
+  <div class="logo">
+    <a href="index.html">
+      <img src="../assets/pages/img/logo-big.png" alt="" />
+    </a>
+  </div>
+  <!-- END LOGO -->
+  <!-- BEGIN LOGIN -->
+  <div class="content">
+    <!-- BEGIN REGISTRATION FORM -->
+    <form class="register-form" id="loginform" [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm.value)" #form="ngForm">
+      <h3 class="font-green">Sign Up</h3>
+      <p class="hint"> Enter your personal details below: </p>
+      <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Employee ID</label>
+        <input class="form-control placeholder-no-fix" required type="text" formControlName="gt_id" placeholder="GT-ID" /> </div>
+      <div class="form-group">
+        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+        <label class="control-label visible-ie8 visible-ie9">Email</label>
+        <input class="form-control placeholder-no-fix" required type="text" placeholder="Email" formControlName="email" /> </div>
+      <p class="hint"> Enter your account details below: </p>
+      <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Password</label>
+        <input class="form-control placeholder-no-fix" required type="password" autocomplete="off" id="register_password" formControlName="password" placeholder="Password" /> </div>
+      <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+        <input class="form-control placeholder-no-fix" required type="password" autocomplete="off" formControlName="password_confirmation" placeholder="Re-type Your Password" /> </div>
+      <div class="form-group margin-top-20 margin-bottom-20">
+        <label class="check">
+          <input type="checkbox" formControlName="terms" required /> I agree to the
+          <a href="javascript:;"> Terms of Service </a> &
+          <a href="javascript:;"> Privacy Policy </a>
+        </label>
+        <div id="register_tnc_error"> </div>
+      </div>
+      <div class="form-actions">
+        <a [routerLink]="['/login']" class="btn btn-default">Back</a>
+        <button [disabled]="!registerForm.valid" type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
+      </div>
+    </form>
+    <!-- END REGISTRATION FORM -->
+  </div>
+  <div class="copyright"> 2014 © Metronic. Admin Dashboard Template. </div>
+</div>
