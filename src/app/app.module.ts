@@ -24,6 +24,9 @@ import { AuthGuard } from './guards/auth.guard';
 // App Third Party Tools
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HeaderComponent } from './layouts/header/header.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { DashboardComponent } from './home/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    HeaderComponent,
+    SidebarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

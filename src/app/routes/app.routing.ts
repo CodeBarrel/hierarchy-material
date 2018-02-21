@@ -5,6 +5,7 @@ import {LoginComponent} from '../auth/login/login.component';
 import {RegisterComponent} from '../auth/register/register.component';
 import {ForgetPasswordComponent} from '../auth/forget-password/forget-password.component';
 import {AuthComponent} from '../auth/auth.component';
+import {DashboardComponent} from '../home/dashboard/dashboard.component';
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,7 +17,7 @@ const APP_ROUTES: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent
+        component: DashboardComponent
       },
     ],
   },
