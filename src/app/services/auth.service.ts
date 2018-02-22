@@ -37,11 +37,16 @@ export class AuthService {
   }
 
   static logout(): boolean {
+    console.log('logout');
     if (localStorage.getItem("loggedIn") != null) {
       localStorage.removeItem('loggedIn');
       return true;
     }
     return false
+  }
+
+  getUserGTID(req) {
+    return this.httpClient.post(environment.tree_backend +'/api/user/userGTID', req);
   }
 
 }
