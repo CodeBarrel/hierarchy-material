@@ -1,25 +1,32 @@
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from '../home/home.component';
 import {AuthGuard} from '../guards/auth.guard';
 import {LoginComponent} from '../auth/login/login.component';
 import {RegisterComponent} from '../auth/register/register.component';
 import {ForgetPasswordComponent} from '../auth/forget-password/forget-password.component';
-import {AuthComponent} from '../auth/auth.component';
 import {DashboardComponent} from '../home/dashboard/dashboard.component';
+import {HierarchyComponent} from '../home/hierarchy/hierarchy.component';
+import {ViewComponent} from '../home/hierarchy/view/view.component';
 
 const APP_ROUTES: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
-    path: 'home',
+    path: 'dashboard',
     pathMatch: 'full',
-    component: HomeComponent,
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'hierarchy',
+    pathMatch: 'full',
+    component: HierarchyComponent,
     canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        component: DashboardComponent
-      },
-    ],
+        pathMatch: 'full',
+        component: ViewComponent
+      }
+    ]
   },
   {
     path: 'login',
@@ -33,7 +40,7 @@ const APP_ROUTES: Routes = [
     path: 'forgot-password',
     component: ForgetPasswordComponent
   },
-  {path: '**', redirectTo: 'home'},
+  {path: '**', redirectTo: 'dashboard'},
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

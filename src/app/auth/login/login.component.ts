@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (AuthService.isLoggedIn()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashboard']);
     }
   }
 
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           this.toastr.success('You have successfully logged in', `Welcome ${res['name']}!`);
           console.log('You have successfully logged in');
           setTimeout(() => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/dashboard']);
           },1500)
         }else{
           localStorage.setItem('loggedIn', 'false');

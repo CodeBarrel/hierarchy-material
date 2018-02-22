@@ -1,0 +1,26 @@
+
+<!-- Key component -->
+<div class="hv-item" [class.collapse]="wasClicked">
+
+  <div class="hv-item-parent"  [ngClass]="{'no-child': node.nodes.length == 0 }">
+    <div class="person" (click)="onClick($event)" *ngIf="node.style == 'person'">
+      <img src="https://pbs.twimg.com/profile_images/762654833455366144/QqQhkuK5.jpg" alt="">
+      <p class="name">
+        {{node.header}}
+      </p>
+    </div>
+    <p class="simple-card" [ngClass]="{'circle': node.style == 'circ' }" (click)="onClick($event)" *ngIf="node.style == null || node.style == 'rect' || node.style == 'circ'"> {{node.header}} </p>
+  </div>
+
+  <div class="hv-item-children" *ngIf="!isLeaf(node)" [@collapse]="state">
+
+    <div class="hv-item-child" *ngFor="let innerNode of node.nodes" [ngClass]="{'has-class': node.nodes.length == 1 }">
+      <div>
+        <app-node [node]="innerNode"></app-node>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
