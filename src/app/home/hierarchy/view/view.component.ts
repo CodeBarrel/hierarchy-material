@@ -10,7 +10,6 @@ export class ViewComponent implements OnInit {
   node: Node;
   event;
   isDataAvailable: boolean = false;
-  title = 'Welcome to Tree Hierarchy View';
   mouseWheelDir: string = '';
 
   constructor(private hierarchyService: HierarchyService) {

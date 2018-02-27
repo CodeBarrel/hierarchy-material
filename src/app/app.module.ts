@@ -20,6 +20,7 @@ import { ViewComponent } from './home/hierarchy/view/view.component';
 import { NodeComponent } from './home/hierarchy/node/node.component';
 import { HierarchyService } from './services/hierarchy.service';
 import { AuthService } from './services/auth.service';
+import { MousewheelDirective } from './directives/mousewheel.directive';
 
 // App Routes
 import { routing } from './routes/app.routing';
@@ -44,7 +45,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     DashboardComponent,
     HierarchyComponent,
     ViewComponent,
-    NodeComponent
+    NodeComponent,
+    MousewheelDirective,
   ],
   imports: [
     BrowserModule,

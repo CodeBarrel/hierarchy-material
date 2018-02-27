@@ -1,14 +1,15 @@
-<section id="draggable" class="management-hierarchy" mouseWheel
-         (mouseWheelUp)="mouseWheelUpFunc(event)"
-         (mouseWheelDown)="mouseWheelDownFunc(event)" draggable="true">
-  <h4 style="color:green">{{mouseWheelDir}}</h4>
-  <h1>{{title}}</h1>
-  <div class="hv-container">
-    <div class="hv-wrapper" *ngIf="isDataAvailable">
-      <!-- Key component -->
-      <div class="hv-item">
-        <app-node [node]="node"></app-node>
+<div class="portlet light" >
+  <section id="Treedraggable" class="management-hierarchy" mouseWheel
+           (mouseWheelUp)="mouseWheelUpFunc(event)"
+           (mouseWheelDown)="mouseWheelDownFunc(event)" draggable="true">
+    <h4 style="color:green">{{mouseWheelDir}}</h4>
+    <div class="hv-container">
+      <div class="hv-wrapper" *ngIf="isDataAvailable">
+        <!-- Key component -->
+        <div class="hv-item">
+          <app-node [node]="node"></app-node>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

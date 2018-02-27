@@ -11,20 +11,19 @@ const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
-    pathMatch: 'full',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'hierarchy',
-    pathMatch: 'full',
-    component: HierarchyComponent,
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
-        pathMatch: 'full',
-        component: ViewComponent
+        path: 'hierarchy',
+        component: HierarchyComponent,
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: ViewComponent
+          }
+        ]
       }
     ]
   },
