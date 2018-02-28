@@ -9,10 +9,25 @@
         {{node.header}}
       </p>
     </div>
-    <p class="simple-card" [ngClass]="{'circle': node.style == 'circ' }" (click)="onClick($event)" *ngIf="node.style == null || node.style == 'rect' || node.style == 'circ'"> {{node.header}} </p>
+    <div class="simple-card" [ngClass]="{'circle': node.style == 'circ','active-options': option === true }"  *ngIf="node.style == null || node.style == 'rect' || node.style == 'circ'">
+      <p (click)="toggleShowDiv($event)">
+        {{node.header}}
+      </p>
+      <div class="node-options" (click)="activeOptions(option)">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <div class="node-options-more">
+        <a class="btn btn-circle btn-icon-only blue" (click)="editNode()">
+          <i class="fa fa-edit"></i>
+        </a>
+        <a class="btn btn-circle btn-icon-only red" href="javascript:;">
+          <i class="icon-trash"></i>
+        </a>
+      </div>
+    </div>
   </div>
 
-  <div class="hv-item-children" *ngIf="!isLeaf(node)" [@collapse]="state">
+  <div class="hv-item-children" *ngIf="!isLeaf(node)" [@slideInOut]="animationState">
 
     <div class="hv-item-child" *ngFor="let innerNode of node.nodes" [ngClass]="{'has-class': node.nodes.length == 1 }">
       <div>
