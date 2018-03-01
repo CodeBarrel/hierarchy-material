@@ -1,6 +1,10 @@
+.dialog{
+  top: 100px !important;
+}
 .portlet {
   overflow: hidden;
   background-color: #26344B !important;
+
   .management-hierarchy {
     cursor: move;
     width: 100%;

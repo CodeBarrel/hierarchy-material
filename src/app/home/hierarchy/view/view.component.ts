@@ -12,7 +12,6 @@ export class ViewComponent implements OnInit {
   event;
   isDataAvailable: boolean = false;
   mouseWheelDir: string = '';
-  editNode: Node;
 
   constructor(private hierarchyService: HierarchyService,public ngxSmartModalService: NgxSmartModalService) {
   }
@@ -33,11 +32,10 @@ export class ViewComponent implements OnInit {
   mouseWheelDownFunc(event) {
     this.mouseWheelDir = 'downward direction';
   }
-  getNode(node){
-    console.log(node);
-  }
-  receiveNodeEvent($event) {
-    // console.log($event);
-    this.editNode = $event;
+
+  ngAfterViewInit() {
+    this.ngxSmartModalService.getModal('nodeEditModal').onCloseFinished.subscribe((event: Event) => {
+      this.ngxSmartModalService.resetModalData('nodeEditModal');
+    });
   }
 }

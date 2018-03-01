@@ -12,10 +12,32 @@
       </div>
     </div>
   </section>
-  <ngx-smart-modal #nodeEditModal identifier="nodeEditModal" (onOpen)="getNode(editNode)" (nodeEvent)="receiveNodeEvent($event)">
-    <h1>asd</h1>
-
-    <button (click)="nodeEditModal.close()">Close</button>
+  <ngx-smart-modal #nodeEditModal identifier="nodeEditModal" [customClass]="'edit-modal'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button (click)="nodeEditModal.close()" class="close" ></button>
+          <h4 *ngIf="nodeEditModal.hasData()" class="modal-title">{{ nodeEditModal.getData().header }}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 300px;"><div class="scroller" style="height: 300px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1" data-initialized="1">
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Some Input</h4>
+                <div *ngIf="nodeEditModal.hasData()">
+                  <h1>{{ nodeEditModal.getData().header }}</h1>
+                  <pre>{{ nodeEditModal.getData() }}</pre>
+                </div>
+              </div>
+            </div>
+          </div><div class="slimScrollBar" style="background: rgb(187, 187, 187); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 300px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="nodeEditModal.close()" class="btn dark btn-outline">Close</button>
+          <button type="button" class="btn green">Save changes</button>
+        </div>
+      </div>
+    </div>
   </ngx-smart-modal>
 </div>
 
