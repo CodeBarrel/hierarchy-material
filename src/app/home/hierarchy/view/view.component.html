@@ -12,4 +12,11 @@
       </div>
     </div>
   </section>
+  <ngx-smart-modal #nodeEditModal identifier="nodeEditModal" (onOpen)="getNode(editNode)" (nodeEvent)="receiveNodeEvent($event)">
+    <h1>asd</h1>
+
+    <button (click)="nodeEditModal.close()">Close</button>
+  </ngx-smart-modal>
 </div>
+
+

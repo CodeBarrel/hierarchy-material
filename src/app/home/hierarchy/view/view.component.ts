@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HierarchyService} from '../../../services/hierarchy.service';
+import {NgxSmartModalService} from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-view',
@@ -11,8 +12,9 @@ export class ViewComponent implements OnInit {
   event;
   isDataAvailable: boolean = false;
   mouseWheelDir: string = '';
+  editNode: Node;
 
-  constructor(private hierarchyService: HierarchyService) {
+  constructor(private hierarchyService: HierarchyService,public ngxSmartModalService: NgxSmartModalService) {
   }
 
   ngOnInit() {
@@ -30,5 +32,12 @@ export class ViewComponent implements OnInit {
 
   mouseWheelDownFunc(event) {
     this.mouseWheelDir = 'downward direction';
+  }
+  getNode(node){
+    console.log(node);
+  }
+  receiveNodeEvent($event) {
+    // console.log($event);
+    this.editNode = $event;
   }
 }

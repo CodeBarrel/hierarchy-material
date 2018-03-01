@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { trigger,state,style,transition,animate,group } from '@angular/animations';
+import {NgxSmartModalService} from 'ngx-smart-modal';
 
 class Node {
   public header: string;
@@ -64,10 +65,12 @@ export class NodeComponent implements OnInit {
   wasClicked = false;
   state: string = 'in';
   option: boolean = false;
-
   animationState = 'in';
 
-  constructor() { }
+  editNodeVar: Node;
+  @Output() nodeEvent = new EventEmitter<Node>();
+
+  constructor(public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
   }
@@ -86,17 +89,28 @@ export class NodeComponent implements OnInit {
   activeOptions(option: any){
     (option == true) ? this.option = false : this.option = true
   }
-  editNode(){
-    alert('1');
+  editNode(node){
+    this.editNodeVar = node;
+    this.nodeEvent.emit(this.editNodeVar);
+    // console.log(this.editNodeVar);
+    this.ngxSmartModalService.getModal('nodeEditModal').open();
+    //this.ngxSmartModalService.getModal('nodeEditModal').open(node);
   }
 
   toggleShowDiv(divName: string) {
-    /*if (divName === 'divA') {
-      console.log(this.animationState);
-
-      console.log(this.animationState);
-    }*/
     this.animationState = this.animationState === 'out' ? 'in' : 'out';
   }
+
+  openModal() {
+    this.ngxSmartModalService.getModal('nodeEditModal').onOpen.subscribe((event: Event) => {
+      console.log('Rickroll modal opened!', event);
+    });
+  }
+
+  /*ngAfterViewInit() {
+    this.ngxSmartModalService.getModal('nodeEditModal').onOpen.subscribe((event: Event) => {
+      console.log('Rickroll modal opened!', event);
+    });
+  }*/
 
 }

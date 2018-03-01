@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 
 // App Components
 import { AppRoutingModule } from './app-routing.module';
@@ -53,6 +54,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxSmartModalModule.forRoot(),
     routing,
     FormsModule,
     ReactiveFormsModule,
@@ -62,6 +64,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AuthGuard,
     AuthService,
     HierarchyService,
+    NgxSmartModalService,
   ],
   bootstrap: [AppComponent]
 })
