@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import { trigger,state,style,transition,animate,group } from '@angular/animations';
-import {NgxSmartModalService} from 'ngx-smart-modal';
+import { NgxSmartModalService } from 'ngx-smart-modal';
+import { HierarchyService } from '../../../services/hierarchy.service';
 
 class Node {
   public header: string;
@@ -67,9 +68,16 @@ export class NodeComponent implements OnInit {
   option: boolean = false;
   animationState = 'in';
 
-  constructor(public ngxSmartModalService: NgxSmartModalService) { }
+  loader: boolean = true;
+
+  constructor(
+    public ngxSmartModalService: NgxSmartModalService,
+    public HierarchyService: HierarchyService,
+    private elRef:ElementRef
+  ) { }
 
   ngOnInit() {
+
   }
 
   public isLeaf(node): boolean {
@@ -83,14 +91,62 @@ export class NodeComponent implements OnInit {
     this.state = (this.state === 'in' ? 'out' : 'in');
     this.wasClicked= !this.wasClicked;
   }
-  activeOptions(option: any){
-    this.option = false;
-    (option == true) ? this.option = false : this.option = true;
+
+  activeOptions($event){
+    let otherNodeOptions = this.elRef.nativeElement.querySelectorAll('.single-node');
+    let element = $event.currentTarget;
+    let pElement = element.parentElement;
+    otherNodeOptions.forEach(eachObj => {
+      if(eachObj.classList.contains('active-options') && eachObj != pElement){
+        eachObj.classList.remove('active-options');
+      }
+      if(eachObj == pElement){
+        pElement.classList.toggle('active-options');
+      }
+    });
   }
+
   editNode(node){
-    console.log(node);
-    this.ngxSmartModalService.setModalData(node, 'nodeEditModal');
-    this.ngxSmartModalService.getModal('nodeEditModal').open();
+    let nodeEditData;
+    let allNodes = [];
+    let selectedChildNodes = [];
+    this.HierarchyService.getTree().subscribe(
+      (data) => {
+        for (let key in data) {
+          let value = data[key];
+          allNodes.push({
+            id: value.id,
+            text: value.name
+          });
+          node.nodes.forEach((singleNode)=>{
+            if(value.name == singleNode.header) {
+              selectedChildNodes.push(String(value.id));
+            }
+          });
+        }
+        nodeEditData = {
+          nodeName:node.header,
+          nodes: allNodes,
+          selectedNodes: selectedChildNodes,
+          options: {
+            multiple: true
+          }
+        };
+        this.ngxSmartModalService.setModalData(nodeEditData, 'nodeEditModal');
+        this.ngxSmartModalService.getModal('nodeEditModal').open();
+
+      },
+      (err) => {
+        console.log(err);
+        this.ngxSmartModalService.resetModalData('nodeEditModal');
+      }
+    );
+    /*node.nodes.forEach((node)=>{
+      selectedChildNodes.push({
+        id: node.header,
+        text: node.header
+      });
+    });*/
   }
 
   toggleShowDiv(divName: string) {

@@ -1,6 +1,7 @@
 .portlet {
   overflow: hidden;
-  background-color: #26344B !important; }
+  background-color: #26344B !important;
+  position: relative;}
   .portlet .management-hierarchy {
     cursor: move;
     width: 100%;

@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.userGTID = this.authService.getUserGTID({'email': localStorage.getItem("user_email")}).subscribe((data) => {
-      console.log(data);
+      //console.log(data);
       this.user = data;
       return data;
     });

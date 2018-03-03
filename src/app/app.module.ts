@@ -22,6 +22,7 @@ import { NodeComponent } from './home/hierarchy/node/node.component';
 import { HierarchyService } from './services/hierarchy.service';
 import { AuthService } from './services/auth.service';
 import { MousewheelDirective } from './directives/mousewheel.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // App Routes
 import { routing } from './routes/app.routing';
@@ -31,7 +32,9 @@ import { AuthGuard } from './guards/auth.guard';
 
 // App Third Party Tools
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AngularDraggableModule } from 'angular2-draggable';
+import { Select2Module } from 'ng2-select2';
+import { LoadingModule } from 'ngx-loading';
 
 
 @NgModule({
@@ -59,6 +62,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     ToastModule.forRoot(),
+    AngularDraggableModule,
+    Select2Module,
+    LoadingModule,
   ],
   providers: [
     AuthGuard,

@@ -1,36 +1,54 @@
 <div class="portlet light" >
-  <section id="Treedraggable" class="management-hierarchy" mouseWheel
-           (mouseWheelUp)="mouseWheelUpFunc(event)"
-           (mouseWheelDown)="mouseWheelDownFunc(event)" draggable="true">
+  <section id="Treedraggable" class="management-hierarchy"
+           ngDraggable [preventDefaultEvent]='false'
+           (started)="onStart($event)" (stopped)="onStop($event)">
     <h4 style="color:green">{{mouseWheelDir}}</h4>
-    <div class="hv-container">
+    <div class="hv-container" mouseWheel
+         (mouseWheelUp)="mouseWheelUpFunc(event)"
+         (mouseWheelDown)="mouseWheelDownFunc(event)">
       <div class="hv-wrapper" *ngIf="isDataAvailable">
         <!-- Key component -->
         <div class="hv-item">
-          <app-node [node]="node"></app-node>
+          <app-node [node]="node" ></app-node>
         </div>
       </div>
     </div>
   </section>
-  <ngx-smart-modal #nodeEditModal identifier="nodeEditModal" [customClass]="'edit-modal'">
+  <ngx-smart-modal #nodeEditModal
+                   identifier="nodeEditModal"
+                   [customClass]="'edit-modal'"
+                   (onClose)="closeEditNodeModal()"
+                   (onDismiss)="closeEditNodeModal()">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button (click)="nodeEditModal.close()" class="close" ></button>
-          <h4 *ngIf="nodeEditModal.hasData()" class="modal-title">{{ nodeEditModal.getData().header }}</h4>
+          <h4 *ngIf="nodeEditModal.hasData()" class="modal-title">{{ nodeEditModal.getData().nodeName }}</h4>
         </div>
-        <div class="modal-body">
-          <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 300px;"><div class="scroller" style="height: 300px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1" data-initialized="1">
-            <div class="row">
-              <div class="col-md-12">
-                <h4>Some Input</h4>
-                <div *ngIf="nodeEditModal.hasData()">
-                  <h1>{{ nodeEditModal.getData().header }}</h1>
-                  <pre>{{ nodeEditModal.getData() }}</pre>
+        <div class="modal-body" style="min-height: 300px">
+          <div class="row"  *ngIf="!loading">
+            <div class="col-md-12" *ngIf="nodeEditModal.hasData()">
+              <form action="#" class="form-horizontal">
+                <div class="form-body">
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Node Name</label>
+                    <div class="col-md-8">
+                      <input type="text" value="{{ nodeEditModal.getData().nodeName }}" class="form-control" placeholder="Enter text">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Child Nodes</label>
+                    <div class="col-md-8">
+                      <select2 [data]="nodeEditModal.getData().nodes"
+                               [options]="nodeEditModal.getData().options"
+                               [width]="'100%'"
+                               [value]="nodeEditModal.getData().selectedNodes"></select2>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </form>
             </div>
-          </div><div class="slimScrollBar" style="background: rgb(187, 187, 187); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 300px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+          </div>
         </div>
         <div class="modal-footer">
           <button (click)="nodeEditModal.close()" class="btn dark btn-outline">Close</button>
@@ -38,6 +56,7 @@
         </div>
       </div>
     </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
   </ngx-smart-modal>
 </div>
 

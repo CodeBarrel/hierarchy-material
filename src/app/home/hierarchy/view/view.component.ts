@@ -12,6 +12,7 @@ export class ViewComponent implements OnInit {
   event;
   isDataAvailable: boolean = false;
   mouseWheelDir: string = '';
+  public loading = false;
 
   constructor(private hierarchyService: HierarchyService,public ngxSmartModalService: NgxSmartModalService) {
   }
@@ -19,7 +20,7 @@ export class ViewComponent implements OnInit {
   ngOnInit() {
     this.hierarchyService.getCompanyTree({'companyID': 1}).subscribe(data => {
       let req = data;
-      console.log(req[0]);
+      //console.log(req[0]);
       this.node = req[0];
       this.isDataAvailable = true;
     });
@@ -37,5 +38,16 @@ export class ViewComponent implements OnInit {
     this.ngxSmartModalService.getModal('nodeEditModal').onCloseFinished.subscribe((event: Event) => {
       this.ngxSmartModalService.resetModalData('nodeEditModal');
     });
+  }
+
+  onStart(event) {
+    //console.log('started output:', event);
+  }
+
+  onStop(event) {
+    //console.log('stopped output:', event);
+  }
+  closeEditNodeModal(){
+    this.ngxSmartModalService.resetModalData('nodeEditModal');
   }
 }

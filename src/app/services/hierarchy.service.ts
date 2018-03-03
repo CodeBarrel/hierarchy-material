@@ -21,4 +21,7 @@ export class HierarchyService {
   newNode(req : Object){
     return this.httpClient.post(environment.tree_backend +'/api/newNode',req);
   }
+  getTree(){
+    return this.httpClient.get(environment.tree_backend +'/api/getTree');
+  }
 }

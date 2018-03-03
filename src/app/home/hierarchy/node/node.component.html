@@ -3,17 +3,17 @@
 <div class="hv-item" [class.collapse]="wasClicked">
 
   <div class="hv-item-parent"  [ngClass]="{'no-child': node.nodes.length == 0 }">
-    <div class="person" (click)="onClick($event)" *ngIf="node.style == 'person'">
+    <div class="person single-node" (click)="onClick($event)" *ngIf="node.style == 'person'">
       <img src="https://pbs.twimg.com/profile_images/762654833455366144/QqQhkuK5.jpg" alt="">
       <p class="name">
         {{node.header}}
       </p>
     </div>
-    <div class="simple-card" [ngClass]="{'circle': node.style == 'circ','active-options': option === true }"  *ngIf="node.style == null || node.style == 'rect' || node.style == 'circ'">
+    <div class="simple-card single-node" [ngClass]="{'circle': node.style == 'circ','active-options': option === true }"  *ngIf="node.style == null || node.style == 'rect' || node.style == 'circ'">
       <p (click)="toggleShowDiv($event)">
         {{node.header}}
       </p>
-      <div class="node-options" (click)="activeOptions(option)">
+      <div class="node-options" (click)="activeOptions($event)">
         <i class="fa fa-ellipsis-v"></i>
       </div>
       <div class="node-options-more">
