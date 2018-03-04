@@ -8,6 +8,8 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 
 // App Components
 import {AppRoutingModule} from './app-routing.module';
+import {AngularFireModule} from 'angularfire2';
+import {environment} from '../environments/environment';
 
 // App Components
 import {AppComponent} from './app.component';
@@ -32,6 +34,7 @@ import {routing} from './routes/app.routing';
 
 // App Guards
 import {AuthGuard} from './guards/auth.guard';
+import {Auth2Guard} from './guards/auth2.guard';
 
 // App Third Party Tools
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
@@ -59,6 +62,7 @@ import {LoadingModule} from 'ngx-loading';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AppRoutingModule,
@@ -73,6 +77,7 @@ import {LoadingModule} from 'ngx-loading';
   ],
   providers: [
     AuthGuard,
+    Auth2Guard,
     Auth2Service,
     AuthService,
     HierarchyService,

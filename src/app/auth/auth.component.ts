@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {Auth2Service} from '../services/auth2.service';
 
 @Component({
   selector: 'app-auth',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
   routerURL: string;
-  constructor(router: Router) {
+  constructor(router: Router,public auth: Auth2Service) {
     this.routerURL = router.url;
   }
 
