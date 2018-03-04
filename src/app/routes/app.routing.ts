@@ -6,6 +6,7 @@ import {ForgetPasswordComponent} from '../auth/forget-password/forget-password.c
 import {DashboardComponent} from '../home/dashboard/dashboard.component';
 import {HierarchyComponent} from '../home/hierarchy/hierarchy.component';
 import {ViewComponent} from '../home/hierarchy/view/view.component';
+import {AuthComponent} from '../auth/auth.component';
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -29,11 +30,11 @@ const APP_ROUTES: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: AuthComponent
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: AuthComponent
   },
   {
     path: 'forgot-password',

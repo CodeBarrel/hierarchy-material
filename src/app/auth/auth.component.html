@@ -1,3 +1,97 @@
+<div class="login">
+  <div class="logo">
+    <a href="index.html">
+      <img src="../assets/pages/img/logo-big.png" alt="" />
+    </a>
+  </div>
+  <!-- END LOGO -->
+  <div class="content">
 
+    <div *ngIf="routerURL == '/login'; then login else register">
+      <!-- Template will replace this div -->
+    </div>
 
+    <ng-template #login>
+      <!-- BEGIN LOGIN FORM -->
+      <form class="login-form">
+        <h3 class="form-title font-green">Sign In</h3>
+        <div class="alert alert-danger display-hide">
+          <button class="close" data-close="alert"></button>
+          <span> Enter any username and password. </span>
+        </div>
+        <div class="form-group">
+          <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+          <label class="control-label visible-ie8 visible-ie9">Email</label>
+          <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" /> </div>
+        <div class="form-group">
+          <label class="control-label visible-ie8 visible-ie9">Password</label>
+          <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" /> </div>
+        <div class="form-actions">
+          <button type="submit" class="btn green uppercase">Login</button>
+          <label class="rememberme check">
+            <input type="checkbox" name="remember" value="1" />Remember </label>
+          <a [routerLink]="['/forgot-password']" id="forget-password" class="forget-password">Forgot Password?</a>
+        </div>
+        <div class="login-options">
+          <h4>Or login with</h4>
+          <ul class="social-icons">
+            <!--<li>
+              <a class="social-icon-color facebook" data-original-title="facebook" href="javascript:;"></a>
+            </li>
+            <li>
+              <a class="social-icon-color twitter" data-original-title="Twitter" href="javascript:;"></a>
+            </li>-->
+            <li>
+              <a class="social-icon-color googleplus" data-original-title="Goole Plus" href="javascript:;"></a>
+            </li>
+            <!--<li>
+              <a class="social-icon-color linkedin" data-original-title="Linkedin" href="javascript:;"></a>
+            </li>-->
+          </ul>
+        </div>
+        <div class="create-account">
+          <p>
+            <a [routerLink]="['/register']" id="register-btn" class="uppercase">Create an account</a>
+          </p>
+        </div>
+      </form>
+      <!-- END LOGIN FORM -->
+    </ng-template>
 
+    <ng-template #register>
+      <!-- BEGIN REGISTRATION FORM -->
+      <form class="register-form" id="loginform" >
+        <h3 class="font-green">Sign Up</h3>
+        <p class="hint"> Enter your personal details below: </p>
+        <div class="form-group">
+          <label class="control-label visible-ie8 visible-ie9">Employee ID</label>
+          <input class="form-control placeholder-no-fix" required type="text" placeholder="GT-ID" /> </div>
+        <div class="form-group">
+          <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+          <label class="control-label visible-ie8 visible-ie9">Email</label>
+          <input class="form-control placeholder-no-fix" required type="text" placeholder="Email" /> </div>
+        <p class="hint"> Enter your account details below: </p>
+        <div class="form-group">
+          <label class="control-label visible-ie8 visible-ie9">Password</label>
+          <input class="form-control placeholder-no-fix" required type="password" autocomplete="off" id="register_password" placeholder="Password" /> </div>
+        <div class="form-group">
+          <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+          <input class="form-control placeholder-no-fix" required type="password" autocomplete="off" placeholder="Re-type Your Password" /> </div>
+        <div class="form-group margin-top-20 margin-bottom-20">
+          <label class="check">
+            <input type="checkbox" required /> I agree to the
+            <a href="javascript:;"> Terms of Service </a> &
+            <a href="javascript:;"> Privacy Policy </a>
+          </label>
+          <div id="register_tnc_error"> </div>
+        </div>
+        <div class="form-actions">
+          <a [routerLink]="['/login']" class="btn btn-default">Back</a>
+          <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
+        </div>
+      </form>
+      <!-- END REGISTRATION FORM -->
+    </ng-template>
+  </div>
+  <div class="copyright"> 2014 © Metronic. Admin Dashboard Template. </div>
+</div>
