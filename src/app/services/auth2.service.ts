@@ -6,6 +6,7 @@ import {AngularFirestore, AngularFirestoreDocument} from "angularfire2/firestore
 
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/switchMap';
+import {isNullOrUndefined} from "util";
 
 interface User {
   uid: string;
@@ -32,7 +33,6 @@ export class Auth2Service {
           return Observable.of(null)
         }
       });
-
   }
 
   googleLogin() {
@@ -63,9 +63,23 @@ export class Auth2Service {
     return userRef.set(data);
   }
 
+  getUser(){
+    return this.user;
+  }
+
   logout() {
     this.afAuth.auth.signOut();
     this.router.navigateByUrl('/login');
+  }
+
+  public isLoggedIn(){
+    return this.afAuth.authState.map(auth => {
+      if (isNullOrUndefined(auth)) {
+        return false;
+      } else {
+        return true;
+      }
+    });
   }
 
 }

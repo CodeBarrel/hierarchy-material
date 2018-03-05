@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Auth2Service} from '../services/auth2.service';
 
 @Component({
@@ -9,11 +9,19 @@ import {Auth2Service} from '../services/auth2.service';
 })
 export class AuthComponent implements OnInit {
   routerURL: string;
-  constructor(router: Router,public auth: Auth2Service) {
-    this.routerURL = router.url;
+  loggedIn: boolean = false;
+
+  constructor(public router: Router, public auth: Auth2Service) {
+    this.routerURL = this.router.url;
   }
 
   ngOnInit() {
+    this.auth.isLoggedIn().subscribe(user => {
+        (user) ? this.router.navigate(['/dashboard']) : this.loggedIn = true;
+      },
+      err => {
+        this.loggedIn = true;
+      });
   }
 
 }
