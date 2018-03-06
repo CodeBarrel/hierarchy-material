@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
 import {Auth2Service} from '../../services/auth2.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,19 +12,16 @@ import {Auth2Service} from '../../services/auth2.service';
 export class DashboardComponent implements OnInit {
 
   title = 'app';
-  public user;
+  public user: Object;
   public userGTID: Subscription;
   constructor(private authService: AuthService,private auth2Service: Auth2Service) {
-
+    this.auth2Service.getUser().subscribe(data => {
+      this.user = data;
+    });
   }
 
   ngOnInit() {
-    /*this.userGTID = this.authService.getUserGTID({'email': localStorage.getItem("user_email")}).subscribe((data) => {
-      //console.log(data);
-      this.user = data;
-      return data;
-    });*/
-    console.log(this.auth2Service.getUser());
+
   }
 
 }

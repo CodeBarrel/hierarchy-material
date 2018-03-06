@@ -75,8 +75,8 @@
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
           <li class="dropdown dropdown-user">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-              <img *ngIf="user" alt="" class="img-circle" src="https://life.gaditek.com/assets/profile_pic/GT-{{ user?.user_gt_id }}.jpg" />
-              <span class="username username-hide-on-mobile" *ngIf="user"> {{ user?.name }} </span>
+              <img *ngIf="user" alt="" class="img-circle" src="{{ user?.photoURL }}" />
+              <span class="username username-hide-on-mobile" *ngIf="user"> {{ user?.displayName }} </span>
               <i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-default">

@@ -6,6 +6,7 @@ import {HierarchyComponent} from '../home/hierarchy/hierarchy.component';
 import {ViewComponent} from '../home/hierarchy/view/view.component';
 import {AuthComponent} from '../auth/auth.component';
 import {Auth2Guard} from '../guards/auth2.guard';
+import {View2Component} from '../home/hierarchy/view2/view2.component';
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -21,7 +22,7 @@ const APP_ROUTES: Routes = [
           {
             path: '',
             pathMatch: 'full',
-            component: ViewComponent
+            component: View2Component
           }
         ]
       }

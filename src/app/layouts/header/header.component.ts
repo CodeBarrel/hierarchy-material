@@ -15,7 +15,9 @@ export class HeaderComponent implements OnInit {
   constructor(
     public router: Router,
     public afAuth: AngularFireAuth,
-    public auth: Auth2Service) { }
+    public auth2Service: Auth2Service) {
+
+  }
 
   ngOnInit() {
   }
@@ -26,7 +28,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout();
+    this.auth2Service.logout();
   }
 
 }

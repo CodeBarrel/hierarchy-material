@@ -41,6 +41,7 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import {AngularDraggableModule} from 'angular2-draggable';
 import {Select2Module} from 'ng2-select2';
 import {LoadingModule} from 'ngx-loading';
+import { View2Component } from './home/hierarchy/view2/view2.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import {LoadingModule} from 'ngx-loading';
     ViewComponent,
     NodeComponent,
     MousewheelDirective,
+    View2Component,
   ],
   imports: [
     BrowserModule,
