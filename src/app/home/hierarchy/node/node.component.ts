@@ -132,6 +132,7 @@ export class NodeComponent implements OnInit {
             multiple: true
           }
         };
+        console.log(nodeEditData);
         this.ngxSmartModalService.setModalData(nodeEditData, 'nodeEditModal');
         this.ngxSmartModalService.getModal('nodeEditModal').open();
 

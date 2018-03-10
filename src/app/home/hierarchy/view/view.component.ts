@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {HierarchyService} from '../../../services/hierarchy.service';
 import {NgxSmartModalService} from 'ngx-smart-modal';
 
@@ -12,9 +12,14 @@ export class ViewComponent implements OnInit {
   event;
   isDataAvailable: boolean = false;
   mouseWheelDir: string = '';
+  fullscreenStatus: boolean = false;
   public loading = false;
 
-  constructor(private hierarchyService: HierarchyService,public ngxSmartModalService: NgxSmartModalService) {
+  constructor(
+    private hierarchyService: HierarchyService,
+    public ngxSmartModalService: NgxSmartModalService,
+    public element: ElementRef,
+  ) {
   }
 
   ngOnInit() {
@@ -38,6 +43,34 @@ export class ViewComponent implements OnInit {
     this.ngxSmartModalService.getModal('nodeEditModal').onCloseFinished.subscribe((event: Event) => {
       this.ngxSmartModalService.resetModalData('nodeEditModal');
     });
+  }
+  fullscreen() {
+    if(!this.fullscreenStatus){
+      this.launchIntoFullscreen(this.element.nativeElement.querySelector('#hierarchy-tree'));
+    }else{
+      this.exitFullscreen();
+    }
+  }
+
+  launchIntoFullscreen(element) {
+    this.fullscreenStatus = true;
+    if(element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if(element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if(element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if(element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  }
+  exitFullscreen() {
+    this.fullscreenStatus = false;
+    if(document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if(document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
   }
 
   onStart(event) {

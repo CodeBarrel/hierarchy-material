@@ -97,7 +97,7 @@ export class MousewheelDirective {
     }
 
 
-    console.log(this.scrollCount);
+    //console.log(this.scrollCount);
     // for IE
     event.returnValue = true;
     // for Chrome and Firefox

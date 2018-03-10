@@ -1,4 +1,8 @@
-<div class="portlet light" >
+<div class="portlet light" id="hierarchy-tree" [ngClass]="{'fullscreen-tree': fullscreenStatus == true }">
+  <button (click)="fullscreen()" class="btn blue">
+    <span *ngIf="fullscreenStatus != true"><i class="fa fa-arrows-alt"></i> Full Screen</span>
+    <span *ngIf="fullscreenStatus == true"><i class="fa fa-arrows"></i> Exit Screen</span>
+  </button>
   <section id="Treedraggable" class="management-hierarchy"
            ngDraggable [preventDefaultEvent]='false'
            (started)="onStart($event)" (stopped)="onStop($event)">
@@ -31,12 +35,12 @@
               <form action="#" class="form-horizontal">
                 <div class="form-body">
                   <div class="form-group">
-                    <label class="col-md-3 control-label">Node Name</label>
+                    <label class="col-md-3 control-label">Name</label>
                     <div class="col-md-8">
                       <input type="text" value="{{ nodeEditModal.getData().nodeName }}" class="form-control" placeholder="Enter text">
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" *ngIf="nodeEditModal.getData().selectedNodes.length > 0">
                     <label class="col-md-3 control-label">Child Nodes</label>
                     <div class="col-md-8">
                       <select2 [data]="nodeEditModal.getData().nodes"
